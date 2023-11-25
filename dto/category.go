@@ -37,11 +37,11 @@ type DeleteCategoryResponse struct {
 }
 
 type GetCategoryReturn struct {
-	Id         int                `json:"id"`
-	Type       string             `json:"type"`
-	Created_at time.Time          `json:"created_at"`
-	Updated_at time.Time          `json:"Updated_at"`
-	Task       GetTaskForCategory `json:"Tasks"`
+	Id         int                  `json:"id"`
+	Type       string               `json:"type"`
+	Created_at time.Time            `json:"created_at"`
+	Updated_at time.Time            `json:"Updated_at"`
+	Task       []GetTaskForCategory `json:"Tasks"`
 }
 type GetCategoryResponse struct {
 	Result     string              `json:"result"`

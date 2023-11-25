@@ -111,7 +111,7 @@ func (c *categoryPG) DeleteCategory(categoryId int) errs.MessageErr {
 	return nil
 }
 
-func (c *categoryPG) GetCategory() (*[]category_repository.CategoryWithTask, errs.MessageErr) {
+func (c *categoryPG) GetCategory() ([]category_repository.CategoryTaskMapped, errs.MessageErr) {
 	rows, err := c.db.Query(GetCategoryWithTask)
 	if err != nil {
 		return nil, errs.NewInternalServerError("something went wrong")
@@ -130,5 +130,7 @@ func (c *categoryPG) GetCategory() (*[]category_repository.CategoryWithTask, err
 		}
 		categoryTasks = append(categoryTasks, categoryTask)
 	}
-	return &categoryTasks, nil
+	var result category_repository.CategoryTaskMapped
+
+	return result.HandleMappingCategoryWithTask(categoryTasks), nil
 }

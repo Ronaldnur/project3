@@ -10,5 +10,5 @@ type Repository interface {
 	GetCategoryById(categoryId int) (*entity.Category, errs.MessageErr)
 	UpdateCategory(categoryId int, update entity.Category) (*entity.Category, errs.MessageErr)
 	DeleteCategory(categoryId int) errs.MessageErr
-	GetCategory() (*[]CategoryWithTask, errs.MessageErr)
+	GetCategory() ([]CategoryTaskMapped, errs.MessageErr)
 }

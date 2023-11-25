@@ -112,22 +112,28 @@ func (c *categoryService) GetCategoryData(userId int) (*dto.GetCategoryResponse,
 
 	categoryResult := []dto.GetCategoryReturn{}
 
-	for _, eachCategory := range *categories {
+	for _, eachCategory := range categories {
 		category := dto.GetCategoryReturn{
 			Id:         eachCategory.Category.Id,
 			Type:       eachCategory.Category.Type,
 			Created_at: eachCategory.Category.Created_at,
 			Updated_at: eachCategory.Category.Updated_at,
-			Task: dto.GetTaskForCategory{
-				Id:          eachCategory.Task.Id,
-				Title:       eachCategory.Task.Title,
-				Description: eachCategory.Task.Description,
-				User_id:     eachCategory.Task.User_id,
-				Category_id: eachCategory.Task.Category_id,
-				Created_at:  eachCategory.Task.Created_at,
-				Updated_at:  eachCategory.Task.Updated_at,
-			},
+			Task:       []dto.GetTaskForCategory{},
 		}
+
+		for _, eachTask := range eachCategory.Tasks {
+			task := dto.GetTaskForCategory{
+				Id:          eachTask.Id,
+				Title:       eachTask.Title,
+				Description: eachTask.Description,
+				User_id:     eachTask.User_id,
+				Category_id: eachTask.Category_id,
+				Created_at:  eachTask.Created_at,
+				Updated_at:  eachTask.Updated_at,
+			}
+			category.Task = append(category.Task, task)
+		}
+
 		categoryResult = append(categoryResult, category)
 	}
 
