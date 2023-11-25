@@ -206,16 +206,15 @@ func (u *userService) PatchRole(userId int, payload dto.PatchRoleRequest) (*dto.
 	return &response, nil
 }
 
-// Dalam file service/user_service.go
 func (u *userService) SeedAdminUser() (*dto.UserResponse, errs.MessageErr) {
-	// Cek apakah pengguna admin sudah ada
+
 	existingAdmin, err := u.userRepo.GetUserByEmail("admin@gmail.com")
 	if err != nil && err.Status() == http.StatusInternalServerError {
 		return nil, err
 	}
 
 	if existingAdmin != nil {
-		// Admin sudah ada, berikan pesan log dan lanjutkan
+
 		fmt.Println("Admin user already exists. Skipping admin seeding.")
 		return nil, nil
 	}
@@ -243,8 +242,8 @@ func (u *userService) SeedAdminUser() (*dto.UserResponse, errs.MessageErr) {
 		Message:    "Admin user registered successfully",
 		Data: dto.UserReturn{
 			Id:         adminUserCreate.Id,
-			Full_name:  "Admin User",
-			Email:      "admin@example.com",
+			Full_name:  "Admin Control",
+			Email:      "admin@gmail.com",
 			Created_at: adminUserCreate.Created_at,
 		},
 	}
