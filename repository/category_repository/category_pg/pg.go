@@ -119,16 +119,27 @@ func (c *categoryPG) GetCategory() ([]category_repository.CategoryTaskMapped, er
 	categoryTasks := []category_repository.CategoryWithTask{}
 
 	for rows.Next() {
-		var categoryTask category_repository.CategoryWithTask
+		categoryTask := categoryWithTask{}
 
 		err = rows.Scan(
-			&categoryTask.Category.Id, &categoryTask.Category.Type, &categoryTask.Category.Created_at, &categoryTask.Category.Updated_at,
-			&categoryTask.Task.Id, &categoryTask.Task.Title, &categoryTask.Task.Description, &categoryTask.Task.User_id, &categoryTask.Task.Category_id, &categoryTask.Task.Created_at, &categoryTask.Task.Updated_at,
+			&categoryTask.CategoryId,
+			&categoryTask.CategoryType,
+			&categoryTask.CategortyCreatedAt,
+			&categoryTask.CategoryUpdatedAt,
+			&categoryTask.TaskId,
+			&categoryTask.TaskTitle,
+			&categoryTask.TaskDescription,
+			&categoryTask.TaskUserId,
+			&categoryTask.TaskCategoryId,
+			&categoryTask.TaskCreatedAt,
+			&categoryTask.TaskUpdatedAt,
 		)
+		fmt.Println(err)
 		if err != nil {
+			fmt.Println(err)
 			return nil, errs.NewInternalServerError("Please fill all category with task to get all category data")
 		}
-		categoryTasks = append(categoryTasks, categoryTask)
+		categoryTasks = append(categoryTasks, *categoryTask.categoryTaskWithNull())
 	}
 	var result category_repository.CategoryTaskMapped
 
