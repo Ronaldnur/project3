@@ -59,9 +59,7 @@ func (c *categoryPG) CreateNewCategory(newCategory entity.Category) (*entity.Cat
 	rows := c.db.QueryRow(CreateCategory, newCategory.Type)
 
 	err := rows.Scan(&category.Id, &category.Created_at)
-	fmt.Println(err)
 	if err != nil {
-		fmt.Println(err)
 		if err == sql.ErrNoRows {
 			return nil, errs.NewNotFoundError("category not found")
 		}

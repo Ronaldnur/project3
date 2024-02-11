@@ -66,10 +66,12 @@ func handleCreateRequiredTables() {
 			updated_at timestamptz DEFAULT now(),
 			CONSTRAINT task_user_id_fk
 				FOREIGN KEY(user_id)
-					REFERENCES "user"(id),
+					REFERENCES "user"(id)
+					ON DELETE CASCADE,
 			CONSTRAINT task_category_id_fk
 				FOREIGN KEY(category_id)
 					REFERENCES "category"(id)
+					ON DELETE CASCADE
 		);
 		`
 
