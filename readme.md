@@ -1,6 +1,6 @@
 LINK DEPLOYMENT:= https://project3-production-ecd8.up.railway.app
 
-Yang harusnya Mengerjakan Project 3 ini adalah Akmal Alkafi
-Tetapi dikarenakan Mas Akmal yang menghilang
+cara menggunakan project ini
 
-jadi Yang Mengerjakan Project 3 adalah Ronald Nur Sunarto (GLNG-KS07-017)
+1. setelah di extract nama folder diubah menjadi project3
+2. buka kode di VS-Code dan langsung go run main.go
